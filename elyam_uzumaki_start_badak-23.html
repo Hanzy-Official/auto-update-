@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffd400">
+<title>Elyam Uzumaki | Badak WhatsApp</title>
+<style>
+:root{--p:#ffd400;--pink:#ff3fa4;--yellow:#ffe34f;--black:#080808;--cream:#fffaf0}
+*{box-sizing:border-box}
+body{margin:0;color:var(--black);font-family:Impact,"Arial Narrow",system-ui,sans-serif;background:#ffd400}
+.screen{display:none;min-height:100vh}.screen.active{display:block}
+.home{min-height:100vh;padding:40px 18px 48px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:34px;background-color:#ffd400;background-image:linear-gradient(90deg,transparent 96%,rgba(255,255,255,.8) 96%),linear-gradient(transparent 96%,rgba(255,255,255,.8) 96%);background-size:82px 82px}
+.avatar{width:252px;height:252px;max-width:58vw;max-height:58vw;object-fit:cover;border:9px solid #000;border-radius:50%;box-shadow:0 8px 0 #3d0065}
+.home-buttons{width:min(590px,100%);display:grid;gap:28px}
+.menu-navbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;padding:8px;background:#111;border:4px solid #000;border-radius:22px;box-shadow:5px 6px 0 #000}
+.menu-navbar button{min-width:0;border:3px solid #000;border-radius:14px;padding:14px 5px;background:#292929;color:#fff;font-weight:1000;font-size:clamp(9px,2.7vw,14px);font-style:italic;cursor:pointer;box-shadow:0 4px 0 #555}
+.menu-navbar button.active{background:#ffe34f;color:#111;box-shadow:0 4px 0 #b68e00}
+.menu-caption{text-align:center;font:800 13px Arial,sans-serif;color:#333;margin:14px 0 2px}
+@media(max-width:380px){.menu-navbar{gap:4px;padding:5px}.menu-navbar button{padding:12px 2px;font-size:9px}}
+.bigbtn{width:100%;border:6px solid #000;border-radius:100px;background:var(--pink);color:#fff;padding:23px 12px;font-size:clamp(1.45rem,6vw,2.3rem);font-weight:1000;font-style:italic;text-shadow:3px 3px #000;box-shadow:0 7px 0 #3b0060;cursor:pointer}
+.bigbtn.start{background:var(--yellow);color:#fff;font-size:clamp(2.2rem,9vw,3.2rem);padding:25px 12px}
+.bigbtn:active,.method:active,.run:active{transform:translateY(4px);box-shadow:0 2px 0 #000}
+.page{padding:12px 12px 30px;background:linear-gradient(145deg,#ffe866,#ffd400 65%,#f2b900);min-height:100vh}
+.shell{width:min(660px,100%);margin:0 auto;background:var(--cream);border:5px solid #080808;border-radius:30px;padding:16px;box-shadow:7px 8px 0 #080808}
+.back{display:inline-block;text-decoration:none;background:#ffd400;color:#fff;border:3px solid #000;border-radius:15px;padding:10px 14px;box-shadow:3px 4px 0 #000;font-weight:900;font-style:italic;font-size:13px;cursor:pointer}
+.head{display:flex;align-items:center;gap:12px;margin:26px 0 22px}
+.logo{width:72px;height:72px;object-fit:cover;border:4px solid #000;border-radius:20px;box-shadow:4px 5px 0 #000;flex-shrink:0}
+.smalltag{display:inline-block;background:#111;color:white;padding:8px 12px;transform:rotate(-2deg);font-size:12px}
+h1{font-size:clamp(1.6rem,6vw,2.4rem);line-height:1;margin:10px 0 0;color:#d49a00;font-style:italic;text-shadow:2px 2px #000;letter-spacing:-.5px}
+.panel{background:linear-gradient(145deg,#ffe866,#f2b900);border:4px solid #000;border-radius:28px;padding:17px;box-shadow:5px 6px 0 #000}
+.labels{display:flex;gap:10px;align-items:center;margin-bottom:22px}.labels span{display:inline-block;padding:12px 14px;background:#111;color:#fff;font-size:13px;transform:rotate(1deg);box-shadow:3px 4px 0 #000}.labels .active{background:var(--pink);border:3px solid #000;padding:9px 12px}
+h2{font-size:clamp(1.5rem,6vw,2.1rem);color:#080808;font-style:italic;margin:0 0 5px;text-shadow:2px 2px #ffd400}
+.desc{margin:0 0 22px;color:#2a1238;font:14px Arial,sans-serif}
+.status{background:#111;color:white;border-radius:18px;padding:15px;display:flex;align-items:center;gap:12px;box-shadow:4px 5px 0 var(--pink);margin-bottom:22px;font:800 14px Arial,sans-serif}
+.dot{width:14px;height:14px;border-radius:50%;background:#41ff9b;box-shadow:0 0 8px #41ff9b;flex-shrink:0}
+.status small{display:block;color:#ddd;font-weight:400;margin-top:4px}
+label{display:block;font:900 15px Arial,sans-serif;margin:0 0 10px}
+input{width:100%;border:4px solid #000;border-radius:15px;padding:17px 15px;font-size:18px;font-weight:700;outline:none;box-shadow:4px 5px 0 #000;background:white}
+.method-title{margin:26px 0 12px;color:#111;font-weight:900;font-style:italic}
+.methods{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.method{background:#ffd400;color:white;border:4px solid #000;border-radius:22px;min-height:100px;text-align:left;padding:13px;box-shadow:4px 5px 0 #000;font-style:italic;cursor:pointer}
+.method strong{display:block;font-size:clamp(1.8rem,7vw,2.4rem);line-height:1;text-shadow:2px 2px #000}.method span{display:block;font-size:13px;font-weight:900;margin-top:7px}.method.selected{background:var(--pink);outline:3px solid white}
+.download-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 20px}.dl-platform{min-height:86px}.selected-info{background:#fff4a8;border:3px dashed #000;padding:13px;margin:24px 0 22px;font:900 13px Arial,sans-serif}
+.run{width:100%;border:4px solid #000;border-radius:20px;background:#ffd400;color:white;padding:19px 10px;box-shadow:4px 5px 0 #000;font-size:clamp(1.15rem,5vw,1.45rem);font-weight:900;font-style:italic;text-shadow:2px 2px #000;cursor:pointer}
+.progress-wrap{display:none;margin-top:18px;background:#111;color:#fff;border-radius:16px;padding:16px;font:800 13px Arial,sans-serif}
+.progress{height:13px;background:#444;border:2px solid #000;border-radius:20px;overflow:hidden;margin:12px 0}.bar{height:100%;width:0;background:#41ff9b;transition:width .25s}
+.notice{font:12px/1.5 Arial,sans-serif;color:#fff;background:#111;border-radius:12px;padding:12px;margin-top:17px}
+@media(max-width:380px){.shell{padding:12px}.panel{padding:12px}.head{gap:9px}.logo{width:62px;height:62px}.home{gap:28px}.home-buttons{gap:22px}.bigbtn{padding:19px 10px}}
+</style></head>
+<body>
+<section id="home" class="screen active">
+ <div class="home">
+  <img class="avatar" src="https://files.catbox.moe/6cja3o.jpg" alt="Logo Elyam Uzumaki">
+  <div class="home-buttons">
+   <button class="bigbtn start" id="start">START</button>
+   <button class="bigbtn" onclick="openChannel()">CHANNEL OWNER</button>
+  </div>
+ </div>
+</section>
+<section id="choose" class="screen">
+ <main class="page"><div class="shell">
+  <button class="back" onclick="showScreen('home')">← KEMBALI</button>
+  <header class="head"><img class="logo" src="https://files.catbox.moe/6cja3o.jpg" alt="Logo"><div><span class="smalltag">ELYAM UZUMAKI</span><h1>PILIH MENU</h1></div></header>
+  <section class="panel">
+   <p class="desc">Pilih menu dari navbar di bawah ini.</p>
+   <nav class="menu-navbar" aria-label="Pilihan menu">
+    <button class="active" type="button" onclick="openMenu('tool',this)">BADAK WHATSAPP</button>
+    <button type="button" onclick="openMenu('bugwa',this)">BUG WHATSAPP</button>
+    <button type="button" onclick="openMenu('tiktok',this)">TIKTOK DL</button>
+    <button type="button" onclick="openMenu('downall',this)">DOWNLOADER ALL</button>
+    <button type="button" onclick="openMenu('payment',this)">PAYMENT BEKU</button>
+    <button type="button" onclick="openMenu('quran',this)">AL-QUR'AN</button>
+   </nav>
+   <div class="menu-caption">TAP MENU UNTUK MEMBUKA HALAMAN</div>
+  </section>
+ </div></main>
+</section>
+<section id="tool" class="screen">
+ <main class="page"><div class="shell">
+  <button class="back" onclick="showScreen('home')">← KEMBALI</button>
+  <header class="head"><img class="logo" src="https://files.catbox.moe/6cja3o.jpg" alt="Logo"><div><span class="smalltag">COMIC TOOL</span><h1>BADAK WHATSAPP</h1></div></header>
+  <section class="panel">
+   <div class="labels"><span class="active">WHATSAPP!</span><span>COMIC TOOL</span></div>
+   <h2>WA · BADAK WHATSAPP</h2><p class="desc">Panel demo Elyam Uzumaki.</p>
+   <div class="status"><i class="dot"></i><div id="statusTitle">BADAK SISTEM READY<small id="statusSub">4 METODE TERSEDIA</small></div></div>
+   <label for="target">TARGET NUMBER</label><input id="target" type="tel" inputmode="numeric" placeholder="628xxxxxxxxxx" autocomplete="off">
+   <div class="method-title">SELECT METHOD</div>
+   <div class="methods">
+    <button class="method" data-count="50"><strong>50</strong><span>BADAK CHAT</span></button>
+    <button class="method" data-count="100"><strong>100</strong><span>BADAK CHAT</span></button>
+    <button class="method" data-count="200"><strong>200</strong><span>BADAK CHAT</span></button>
+    <button class="method" data-count="489"><strong>489</strong><span>BADAK CHAT</span></button>
+   </div>
+   <div class="selected-info" id="selection">SELECTED: BELUM ADA</div>
+   <button class="run" id="run">⚡ JALANKAN BADAK</button>
+   <div class="progress-wrap" id="progressWrap"><div id="progressText">Memproses...</div><div class="progress"><div class="bar" id="bar"></div></div><div id="progressPct">Memeriksa layanan</div><button class="run" id="doneBtn" style="display:none;margin-top:12px;background:#ffe34f;color:#111;text-shadow:none" type="button" onclick="showScreen('home')">✓ SELESAI — KEMBALI</button></div>
+  </section>
+ </div></main>
+</section>
+
+<section id="bugwa" class="screen">
+ <main class="page"><div class="shell">
+  <button class="back" onclick="showScreen('home')">← KEMBALI</button>
+  <header class="head"><img class="logo" src="https://files.catbox.moe/6cja3o.jpg" alt="Logo"><div><span class="smalltag">ELYAM UZUMAKI</span><h1>BUG WHATSAPP</h1></div></header>
+  <section class="panel">
+   <div class="labels"><span class="active">BUG WHATSAPP</span><span>DEMO PANEL</span></div>
+   <h2>WA • BUG WHATSAPP</h2>
+   <p class="desc">Pilih mode untuk menjalankan animasi demo.</p>
+   <div class="status"><i class="dot"></i><div id="bugStatusTitle">SYSTEM READY<small id="bugStatusSub">Pilih metode demo</small></div></div>
+   <label for="bugTarget">TARGET NUMBER</label>
+   <input id="bugTarget" type="tel" inputmode="numeric" placeholder="628xxxxxxxxxx" autocomplete="off">
+   <div class="method-title">PILIH METODE</div>
+   <div class="methods">
+    <button class="method bug-method" data-method="Forclose Invisible"><strong>01</strong><span>FORCLOSE INVISIBLE</span></button>
+    <button class="method bug-method" data-method="Delay Hard"><strong>02</strong><span>DELAY HARD</span></button>
+    <button class="method bug-method" data-method="Delay Invisible"><strong>03</strong><span>DELAY INVISIBLE</span></button>
+    <button class="method bug-method" data-method="Blank No Click"><strong>04</strong><span>BLANK NO CLICK</span></button>
+   </div>
+   <div class="selected-info" id="bugSelection">METODE: BELUM DIPILIH</div>
+   <button class="run" id="bugRun">⚡ START DEMO</button>
+   <div class="progress-wrap" id="bugProgress">
+    <div id="bugProgressText">Menyiapkan demo...</div>
+    <div class="progress"><div class="bar" id="bugBar"></div></div>
+    <div id="bugPct">0%</div>
+    <button class="run" id="bugDone" style="display:none;margin-top:12px;background:#ffe34f;color:#111;text-shadow:none" type="button">✓ SELESAI</button>
+   </div>
+  </section>
+ </div></main>
+</section>
+
+<section id="tiktok" class="screen">
+ <main class="page"><div class="shell">
+  <button class="back" onclick="showScreen('choose')">← KEMBALI KE MENU</button>
+  <header class="head"><img class="logo" src="https://files.catbox.moe/6cja3o.jpg" alt="Logo"><div><span class="smalltag">DOWNLOADER TOOL</span><h1>TIKTOK DOWNLOADER</h1></div></header>
+  <section class="panel">
+   <div class="labels"><span class="active">TIKTOK</span><span>VIDEO DOWNLOAD</span></div>
+   <h2>DOWNLOAD TIKTOK</h2>
+   <p class="desc">Tempel tautan video TikTok publik. Hasil akan menampilkan tautan video yang bisa kamu unduh.</p>
+   <label for="tiktokUrl">LINK VIDEO TIKTOK</label>
+   <input id="tiktokUrl" type="url" placeholder="https://www.tiktok.com/@user/video/..." autocomplete="url">
+   <button class="run" id="tiktokGet" type="button" style="margin-top:18px">⬇ AMBIL VIDEO</button>
+   <div class="progress-wrap" id="tiktokStatus" style="display:none"><div id="tiktokStatusText">Menghubungkan ke layanan...</div></div>
+   <div id="tiktokResult" style="display:none;margin-top:18px;background:#fff4a8;border:3px solid #000;border-radius:18px;padding:14px">
+    <img id="tiktokCover" alt="Pratinjau video" style="display:none;width:100%;max-height:300px;object-fit:cover;border:3px solid #000;border-radius:12px;margin-bottom:12px">
+    <div id="tiktokTitle" style="font:900 15px/1.4 Arial,sans-serif;overflow-wrap:anywhere;margin-bottom:12px"></div>
+    <a id="tiktokDownload" class="run" href="#" target="_blank" rel="noopener" style="display:block;text-align:center;text-decoration:none">⬇ DOWNLOAD VIDEO</a>
+   </div>
+   <div class="notice">Catatan: gunakan untuk video yang kamu miliki atau diizinkan untuk disimpan. Layanan API pihak ketiga bisa sesekali sibuk atau berubah; kalau gagal, coba lagi atau gunakan tautan TikTok publik lainnya.</div>
+  </section>
+ </div></main>
+</section>
+
+
+<section id="downall" class="screen"><main class="page"><div class="shell">
+<button class="back" onclick="showScreen('choose')">← KEMBALI KE MENU</button><header class="head"><img class="logo" src="https://files.catbox.moe/6cja3o.jpg" alt="Logo"><div><span class="smalltag">11 TOOLS</span><h1>DOWNLOADER ALL</h1></div></header>
+<section class="panel"><div class="labels"><span class="active">PILIH PLATFORM</span><span>DOWNLOAD</span></div><h2>PILIH DOWNLOADER</h2><p class="desc">Pilih platform untuk membuka halaman downloader khusus.</p><div class="method-title">11 DOWNLOADER TERPISAH</div><div class="download-grid">
+<button class="method dl-platform" data-platform="tiktok"><strong>01</strong><span>🎵 TIKTOK DOWNLOADER</span></button>
+<button class="method dl-platform" data-platform="instagram"><strong>02</strong><span>📸 INSTAGRAM DOWNLOADER</span></button>
+<button class="method dl-platform" data-platform="facebook"><strong>03</strong><span>📘 FACEBOOK DOWNLOADER</span></button>
+<button class="method dl-platform" data-platform="youtube"><strong>04</strong><span>▶ YOUTUBE DOWNLOADER</span></button>
+<button class="method dl-platform" data-platform="x"><strong>05</strong><span>𝕏 X DOWNLOADER</span></button>
+<button class="method dl-platform" data-platform="pinterest"><strong>06</strong><span>📌 PINTEREST DOWNLOADER</span></button>
+<button class="method dl-platform" data-platform="threads"><strong>07</strong><span>🧵 THREADS DOWNLOADER</span></button>
+<button class="method dl-platform" data-platform="reddit"><strong>08</strong><span>👽 REDDIT DOWNLOADER</span></button>
+<button class="method dl-platform" data-platform="vimeo"><strong>09</strong><span>▶ VIMEO DOWNLOADER</span></button>
+<button class="method dl-platform" data-platform="soundcloud"><strong>10</strong><span>🎧 SOUNDCLOUD DOWNLOADER</span></button>
+<button class="method dl-platform" data-platform="capcut"><strong>11</strong><span>✂ CAPCUT DOWNLOADER</span></button>
+</div><div id="downloaderPanel" style="display:none;margin-top:18px;background:#fff4a8;border:3px solid #000;border-radius:18px;padding:14px"><button type="button" class="back" id="backToDownloaderList" style="margin-bottom:14px">← PILIH DOWNLOADER LAIN</button><h2 id="downloaderTitle">TIKTOK DOWNLOADER</h2><p class="desc" id="downloaderDesc">Tempel link konten yang ingin diunduh.</p><label id="platformUrlLabel" for="platformUrl">LINK VIDEO</label><input id="platformUrl" type="url" placeholder="https://..." autocomplete="url"><button class="run" id="platformDownload" type="button" style="margin-top:16px">⬇ AMBIL VIDEO</button><div id="platformStatus" class="notice" style="display:none"></div></div><div class="notice">Pilih salah satu dari 11 tombol untuk membuka form platform masing-masing. Dukungan unduhan mengikuti layanan platform terkait.</div></section></div></main></section>
+<section id="payment" class="screen"><main class="page"><div class="shell"><button class="back" onclick="showScreen('choose')">← KEMBALI KE MENU</button><header class="head"><img class="logo" src="https://files.catbox.moe/6cja3o.jpg" alt="Logo"><div><span class="smalltag">PAYMENT STATUS</span><h1>PAYMENT BEKU</h1></div></header>
+<section class="panel"><div class="labels"><span class="active">DANA</span><span>STATUS PEMBAYARAN</span></div><h2>DANA • CEK STATUS</h2><p class="desc">Masukkan nomor DANA untuk memeriksa status permintaan.</p><div class="status"><i class="dot"></i><div id="payState">SYSTEM READY<small>MASUKKAN NOMOR DANA</small></div></div>
+<label for="payNumber">NOMOR DANA</label><input id="payNumber" type="tel" inputmode="numeric" placeholder="08xxxxxxxxxx" maxlength="16" autocomplete="off">
+<button class="run" id="paySimulate" type="button" style="margin-top:18px">🔒 PROSES PERMINTAAN</button><div id="payResult" style="display:none;margin-top:18px;background:#111;color:white;border:3px solid #000;border-radius:18px;padding:16px;font:800 14px/1.6 Arial,sans-serif"></div></section></div></main></section>
+<section id="quran" class="screen"><main class="page"><div class="shell"><button class="back" onclick="showScreen('choose')">← KEMBALI KE MENU</button><header class="head"><img class="logo" src="https://files.catbox.moe/6cja3o.jpg" alt="Logo"><div><span class="smalltag">BACAAN HARIAN</span><h1>AL-QUR'AN</h1></div></header>
+<section class="panel"><div class="labels"><span class="active">AL-QUR'AN</span><span>ARAB & TERJEMAHAN</span></div><h2>BACA AL-QUR'AN</h2><p class="desc">Pilih surah untuk memuat ayat Arab dan terjemahan Indonesia.</p><label for="surahSelect">PILIH SURAH</label><select id="surahSelect" style="width:100%;padding:16px;border:4px solid #000;border-radius:15px;font-size:16px;font-weight:800;background:white"><option value="1">Memuat daftar surah...</option></select><button class="run" id="loadSurah" type="button" style="margin-top:18px">📖 BUKA SURAH</button><div id="quranStatus" class="notice">Koneksi internet diperlukan untuk memuat data.</div><div id="quranVerses" style="margin-top:18px"></div></section></div></main></section>
+
+<script>
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+document.getElementById('start').addEventListener('click',()=>showScreen('choose'));
+function openMenu(screenId,button){document.querySelectorAll('.menu-navbar button').forEach(b=>b.classList.remove('active'));button.classList.add('active');showScreen(screenId)}
+function openChannel(){window.open('https://whatsapp.com/channel/0029Vb7159EEgGfN9xei4u22','_blank','noopener')}
+let chosen=null;
+document.querySelectorAll('.method').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.method').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');chosen=btn.dataset.count;document.getElementById('selection').textContent='SELECTED: '+chosen;}));
+document.getElementById('run').addEventListener('click',()=>{
+ const target=document.getElementById('target').value.trim();
+ if(!target){alert('Masukkan nomor terlebih dahulu.');return}
+ if(!chosen){alert('Pilih metode terlebih dahulu.');return}
+ const run=document.getElementById('run'),wrap=document.getElementById('progressWrap'),bar=document.getElementById('bar'),pct=document.getElementById('progressPct'),txt=document.getElementById('progressText'),title=document.getElementById('statusTitle'),sub=document.getElementById('statusSub');
+ run.disabled=true;run.textContent='⏳ MEMPROSES...';wrap.style.display='block';bar.style.width='0%';pct.textContent='0%';txt.textContent='Memeriksa konfigurasi layanan...';title.childNodes[0].textContent='MEMERIKSA LAYANAN';sub.textContent='MENUNGGU KONFIGURASI';
+ window.setTimeout(()=>{
+   document.getElementById('progressText').textContent='PROSES SELESAI';
+   document.getElementById('statusTitle').childNodes[0].textContent='SELESAI';
+   document.getElementById('statusSub').textContent='LAYANAN BELUM TERHUBUNG';
+   document.getElementById('bar').style.width='100%';
+   document.getElementById('progressPct').textContent='100%';
+   run.style.display='none';
+   document.getElementById('doneBtn').style.display='block';
+ },700);
+});
+
+let bugMethod = null;
+document.querySelectorAll('.bug-method').forEach(btn=>btn.addEventListener('click',()=>{
+ document.querySelectorAll('.bug-method').forEach(x=>x.classList.remove('selected'));
+ btn.classList.add('selected'); bugMethod=btn.dataset.method;
+ document.getElementById('bugSelection').textContent='METODE: '+bugMethod.toUpperCase();
+}));
+document.getElementById('bugRun').addEventListener('click',()=>{
+ const target=document.getElementById('bugTarget').value.trim();
+ if(!target){alert('Masukkan nomor untuk demo.');return}
+ if(!bugMethod){alert('Pilih metode terlebih dahulu.');return}
+ const run=document.getElementById('bugRun'), wrap=document.getElementById('bugProgress');
+ const bar=document.getElementById('bugBar'), pct=document.getElementById('bugPct');
+ const txt=document.getElementById('bugProgressText'), title=document.getElementById('bugStatusTitle');
+ const sub=document.getElementById('bugStatusSub'), done=document.getElementById('bugDone');
+ run.disabled=true;run.style.display='block';run.textContent='⏳ MEMPROSES...';wrap.style.display='block';
+ done.style.display='none';bar.style.width='0%';pct.textContent='0%';txt.textContent='Menyiapkan '+bugMethod+'...';
+ title.childNodes[0].textContent='PROSES BERJALAN';sub.textContent='DEMO LOKAL';
+ let progress=0;
+ const timer=setInterval(()=>{
+  progress+=20;bar.style.width=progress+'%';pct.textContent=progress+'%';
+  if(progress>=100){
+   clearInterval(timer);
+   txt.textContent='BERHASIL — DEMO SELESAI';
+   title.childNodes[0].textContent='BERHASIL';sub.textContent='SIMULASI SELESAI · TIDAK ADA AKSI KE WHATSAPP';
+   run.style.display='none';done.style.display='block';
+  }
+ },280);
+});
+document.getElementById('bugDone').addEventListener('click',()=>{
+ document.getElementById('bugProgress').style.display='none';
+ document.getElementById('bugRun').style.display='block';
+ document.getElementById('bugRun').disabled=false;
+ document.getElementById('bugRun').textContent='⚡ START DEMO';
+ document.getElementById('bugStatusTitle').childNodes[0].textContent='SYSTEM READY';
+ document.getElementById('bugStatusSub').textContent='Pilih metode demo';
+});
+
+// TikTok downloader uses the public TikWM resolver API.
+document.getElementById('tiktokGet').addEventListener('click', async()=>{
+ const input=document.getElementById('tiktokUrl').value.trim();
+ const status=document.getElementById('tiktokStatus');
+ const statusText=document.getElementById('tiktokStatusText');
+ const result=document.getElementById('tiktokResult');
+ const button=document.getElementById('tiktokGet');
+ result.style.display='none';
+ if(!input){alert('Tempel link video TikTok dulu.');return}
+ let parsed;
+ try{parsed=new URL(input)}catch(e){alert('Link tidak valid.');return}
+ if(!/(^|\.)tiktok\.com$/i.test(parsed.hostname)){alert('Masukkan link dari tiktok.com atau link pendek TikTok.');return}
+ button.disabled=true;button.textContent='⏳ MEMPROSES...';status.style.display='block';statusText.textContent='Mengambil informasi video dari layanan downloader...';
+ try{
+  const endpoint='https://www.tikwm.com/api/?url='+encodeURIComponent(input)+'&hd=1';
+  const response=await fetch(endpoint,{method:'GET'});
+  if(!response.ok)throw new Error('Layanan downloader sedang tidak tersedia (HTTP '+response.status+').');
+  const json=await response.json();
+  if(json.code!==0||!json.data)throw new Error(json.msg||'Video tidak ditemukan atau tidak dapat diakses.');
+  const data=json.data;
+  const video=data.hdplay||data.play||data.wmplay;
+  if(!video)throw new Error('Tautan video tidak tersedia untuk video ini.');
+  const title=document.getElementById('tiktokTitle');
+  title.textContent=(data.title||'Video TikTok')+(data.author&&data.author.unique_id?' · @'+data.author.unique_id:'');
+  const cover=document.getElementById('tiktokCover');
+  if(data.cover){cover.src=data.cover;cover.style.display='block'}else{cover.style.display='none';cover.removeAttribute('src')}
+  const download=document.getElementById('tiktokDownload');
+  download.href=video;download.setAttribute('download','tiktok-video.mp4');
+  result.style.display='block';statusText.textContent='Video ditemukan. Tekan DOWNLOAD VIDEO untuk menyimpan atau membuka video.';
+ }catch(error){
+  statusText.textContent='Gagal mengambil video: '+(error.message||'koneksi bermasalah')+' Coba lagi beberapa saat.';
+ }finally{button.disabled=false;button.textContent='⬇ AMBIL VIDEO'}
+});
+
+
+// Each platform has its own downloader form. TikTok is resolved through TikWM; other platforms open a dedicated external service with the submitted URL.
+const downloaderProviders={tiktok:'https://www.tikwm.com/',instagram:'https://snapinsta.app/',facebook:'https://fdown.net/',youtube:'https://support.google.com/youtube/answer/11977233?hl=id',x:'https://ssstwitter.com/',pinterest:'https://pinterestdownloader.com/',threads:'https://threads.net/',reddit:'https://www.reddit.com/',vimeo:'https://vimeo.com/',soundcloud:'https://soundcloud.com/',capcut:'https://www.capcut.com/'};
+const platformNames={tiktok:'TIKTOK',instagram:'INSTAGRAM / REELS',facebook:'FACEBOOK',youtube:'YOUTUBE',x:'TWITTER / X',pinterest:'PINTEREST',threads:'THREADS',reddit:'REDDIT',vimeo:'VIMEO',soundcloud:'SOUNDCLOUD',capcut:'CAPCUT'};
+let activePlatform='tiktok';
+document.querySelectorAll('.dl-platform').forEach(btn=>btn.addEventListener('click',()=>{activePlatform=btn.dataset.platform;document.getElementById('downloaderTitle').textContent=platformNames[activePlatform]+' DOWNLOADER';document.getElementById('downloaderDesc').textContent='Tempel link '+platformNames[activePlatform]+' di bawah, lalu tekan AMBIL VIDEO.';document.getElementById('platformUrlLabel').textContent='LINK '+platformNames[activePlatform];document.getElementById('platformUrl').value='';document.getElementById('platformUrl').placeholder=activePlatform==='tiktok'?'https://www.tiktok.com/@user/video/...':'Tempel link '+platformNames[activePlatform]+' di sini';document.getElementById('platformStatus').style.display='none';document.getElementById('downloaderPanel').style.display='block';document.querySelector('#downall .panel').querySelector('.download-grid').style.display='none';document.querySelector('#downall .panel').querySelector('.method-title').style.display='none';document.querySelector('#downall .panel').querySelector('h2').textContent=platformNames[activePlatform]+' DOWNLOADER';document.querySelector('#downall .panel').querySelector('.desc').textContent='Downloader khusus '+platformNames[activePlatform]+'.';document.getElementById('downloaderPanel').scrollIntoView({behavior:'smooth',block:'start'});}));
+document.getElementById('backToDownloaderList').addEventListener('click',()=>{document.getElementById('downloaderPanel').style.display='none';document.querySelector('#downall .panel').querySelector('.download-grid').style.display='grid';document.querySelector('#downall .panel').querySelector('.method-title').style.display='block';document.querySelector('#downall .panel').querySelector('h2').textContent='PILIH DOWNLOADER';document.querySelector('#downall .panel').querySelector('.desc').textContent='Pilih platform untuk membuka halaman downloader khusus.';});
+document.getElementById('platformDownload').addEventListener('click',async()=>{const raw=document.getElementById('platformUrl').value.trim(),status=document.getElementById('platformStatus');if(!raw){alert('Tempel link terlebih dahulu.');return}let u;try{u=new URL(raw)}catch(e){alert('Link tidak valid.');return}if(!['http:','https:'].includes(u.protocol)){alert('Gunakan link HTTP/HTTPS.');return}if(activePlatform==='tiktok'){document.getElementById('tiktokUrl').value=raw;showScreen('tiktok');document.getElementById('tiktokGet').click();return}status.style.display='block';status.textContent='Membuka layanan '+platformNames[activePlatform]+'… Tempel link yang sama di halaman layanan untuk melanjutkan.';window.open(downloaderProviders[activePlatform],'_blank','noopener');});
+// Payment UI records a local request; it cannot freeze an actual DANA account or balance.
+document.getElementById('paySimulate').addEventListener('click',()=>{
+ const number=document.getElementById('payNumber').value.trim();
+ if(!number){alert('Masukkan nomor DANA terlebih dahulu.');return}
+ if(!/^[0-9+ -]{8,16}$/.test(number)){alert('Format nomor DANA tidak valid.');return}
+ const result=document.getElementById('payResult'),button=document.getElementById('paySimulate');button.disabled=true;button.textContent='⏳ MEMPROSES...';result.style.display='block';result.innerHTML='<div style="color:#ffe34f;font-size:18px;margin-bottom:8px">MEMERIKSA PERMINTAAN</div><div>Nomor DANA: '+safeHtml(number)+'</div><div class="progress"><div class="bar" id="payProgressBar" style="width:0%"></div></div><div id="payProgressText">Mengirim permintaan...</div>';document.getElementById('payState').innerHTML='MEMPROSES<small>PEMERIKSAAN PERMINTAAN</small>';let progress=0;const timer=setInterval(()=>{progress+=20;const bar=document.getElementById('payProgressBar');if(bar)bar.style.width=progress+'%';const label=document.getElementById('payProgressText');if(label)label.textContent=progress<100?'Memeriksa data... '+progress+'%':'Proses selesai.';if(progress>=100){clearInterval(timer);document.getElementById('payState').innerHTML='BERHASIL DIPROSES<small>PERMINTAAN TERCATAT</small>';result.innerHTML='<div style="color:#ffe34f;font-size:18px;margin-bottom:8px">✓ BERHASIL DIPROSES</div><div>Nomor DANA: '+safeHtml(number)+'</div><div>Status: Permintaan berhasil dicatat</div><div>Waktu: '+new Date().toLocaleString('id-ID')+'</div>';button.disabled=false;button.textContent='🔒 PROSES PERMINTAAN';}} ,300);
+});
+function safeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+// Quran text and Indonesian translation from AlQuran Cloud public API.
+const surahSelect=document.getElementById('surahSelect'),quranStatus=document.getElementById('quranStatus');
+async function initSurahs(){try{const res=await fetch('https://api.alquran.cloud/v1/surah');if(!res.ok)throw Error();const json=await res.json();if(json.code!==200||!Array.isArray(json.data))throw Error();surahSelect.innerHTML=json.data.map(s=>'<option value="'+s.number+'">'+s.number+'. '+safeHtml(s.englishName)+' — '+safeHtml(s.name)+' ('+s.numberOfAyahs+' ayat)</option>').join('');quranStatus.textContent='Daftar surah berhasil dimuat.';}catch(e){surahSelect.innerHTML='<option value="1">1. Al-Fatihah</option>';quranStatus.textContent='Daftar surah gagal dimuat. Periksa koneksi lalu coba lagi.';}}
+document.getElementById('loadSurah').addEventListener('click',async()=>{const n=surahSelect.value,box=document.getElementById('quranVerses');box.innerHTML='';quranStatus.textContent='Memuat surah...';try{const res=await fetch('https://api.alquran.cloud/v1/surah/'+encodeURIComponent(n)+'/editions/quran-uthmani,id.indonesian');if(!res.ok)throw Error();const json=await res.json();if(json.code!==200||!json.data||json.data.length<2)throw Error();const arab=json.data[0],indo=json.data[1];quranStatus.textContent=arab.englishName+' berhasil dimuat · '+arab.numberOfAyahs+' ayat';box.innerHTML=arab.ayahs.map((a,i)=>'<article style="background:#fffaf0;border:3px solid #000;border-radius:16px;padding:15px;margin-bottom:13px"><div style="font:800 12px Arial,sans-serif;color:#8a6200;margin-bottom:12px">AYAT '+a.numberInSurah+'</div><div dir="rtl" style="font:28px/2.1 serif;text-align:right;margin-bottom:12px">'+safeHtml(a.text)+'</div><div style="font:15px/1.7 Arial,sans-serif;color:#333">'+safeHtml(indo.ayahs[i]?.text||'')+'</div></article>').join('');}catch(e){quranStatus.textContent='Gagal memuat surah. Periksa koneksi internet dan coba lagi.';}});
+initSurahs();
+
+</script>
+</body></html>
